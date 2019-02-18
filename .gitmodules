@@ -1,0 +1,3 @@
+[submodule "server-project"]
+	path = server-project
+	url = https://github.com/andrecoliveira/frontend-test-01.git
