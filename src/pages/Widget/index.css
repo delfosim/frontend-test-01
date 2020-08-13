@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+}
+
+.btn-add {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  margin-left: 0;
+}

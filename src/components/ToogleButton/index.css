@@ -1,0 +1,9 @@
+.toogle-btn {
+  padding: 0px 5px;
+}
+
+.toogle-btn img {
+  width: 15px;
+  height: 100%;
+  margin-bottom: 4px;
+}

@@ -1,0 +1,11 @@
+.card {
+  border-radius: 0;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  color: #495057;
+}
