@@ -1,4 +1,4 @@
-const initialState = JSON.parse(localStorage.getItem('widgets') || []);
+const initialState = JSON.parse(localStorage.getItem('widgets') || '[]');
 
 export default function widgets(state = initialState, action) {
   switch (action.type) {
