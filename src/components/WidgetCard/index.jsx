@@ -11,7 +11,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './styles';
 
 const WidgetCard = ({
-  type, series, yText, inverted,
+  type, series, yTitle, title, disableOptions, xCategories,
 }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,9 +20,11 @@ const WidgetCard = ({
     title: '',
     yAxis: {
       title: {
-        text: yText,
-        inverted,
+        text: yTitle,
       },
+    },
+    xAxis: {
+      categories: xCategories,
     },
     chart: {
       type,
@@ -38,25 +40,31 @@ const WidgetCard = ({
     <Paper square className={classes.card}>
       <Grid container justify="space-between" alignItems="center" className={classes.header}>
         <Grid item>
-          <span className={classes.title}>Widget 1</span>
+          <span className={classes.title}>{title}</span>
         </Grid>
-        <Grid item>
-          <IconButton
-            onClick={(event) => setAnchorEl(event.currentTarget)}
-          >
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
-            id="widget-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
-          >
-            <MenuItem>Edit</MenuItem>
-            <MenuItem>Delete</MenuItem>
-          </Menu>
-        </Grid>
+        {
+          !disableOptions
+            ? (
+              <Grid item>
+                <IconButton
+                  onClick={(event) => setAnchorEl(event.currentTarget)}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id="widget-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={() => setAnchorEl(null)}
+                >
+                  <MenuItem>Edit</MenuItem>
+                  <MenuItem>Delete</MenuItem>
+                </Menu>
+              </Grid>
+            )
+            : null
+        }
       </Grid>
       <Grid container justify="center" alignItems="center">
         <div className={classes.chart}>
@@ -68,15 +76,18 @@ const WidgetCard = ({
 };
 
 WidgetCard.propTypes = {
+  title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   series: PropTypes.array.isRequired,
-  yText: PropTypes.string,
-  inverted: PropTypes.bool,
+  yTitle: PropTypes.string,
+  disableOptions: PropTypes.bool,
+  xCategories: PropTypes.array,
 };
 
 WidgetCard.defaultProps = {
-  yText: 'Values',
-  inverted: false,
+  yTitle: null,
+  disableOptions: false,
+  xCategories: null,
 };
 
 export default WidgetCard;
