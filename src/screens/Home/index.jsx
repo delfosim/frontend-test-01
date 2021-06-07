@@ -1,5 +1,26 @@
 import React from 'react';
 
-const HomePage = () => <h1 style={{ height: '120vh', margin: '75px 0' }}>Home</h1>;
+import { Grid } from '@material-ui/core';
+
+import { WidgetCard } from '../../components';
+
+const HomePage = () => (
+  <Grid container justify="center">
+    <WidgetCard
+      type="spline"
+      yText="Teste 123"
+      series={[
+        {
+          name: 'Teste',
+          data: [1, 2, 1, 4, 3, 6],
+        },
+        {
+          name: 'Teste 2',
+          data: [4, 2, 12, 3, 2, 0],
+        },
+      ]}
+    />
+  </Grid>
+);
 
 export default HomePage;
