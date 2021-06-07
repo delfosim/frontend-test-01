@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import HomePage from '../screens/Home';
-import WidgetPage from '../screens/Widget';
+import CreateWidgetPage from '../screens/CreateWidget';
 import NotFoundPage from '../screens/NotFound';
 
-import { Navbar } from '../components';
+import { Navbar, FabWidget } from '../components';
 
 const Routes = () => (
   <BrowserRouter>
@@ -13,10 +13,11 @@ const Routes = () => (
     <div className="body">
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/widget/:id" exact component={WidgetPage} />
+        <Route path="/create" exact component={CreateWidgetPage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
     </div>
+    <FabWidget />
   </BrowserRouter>
 );
 
