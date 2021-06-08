@@ -10,7 +10,7 @@ const SearchPage = () => {
   const widgets = useSelector((state) => state.widgets);
   const { name } = useParams();
   const history = useHistory();
-  const [filtered, setFiltered] = useState();
+  const [filtered, setFiltered] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
 
   useEffect(() => {
@@ -26,19 +26,24 @@ const SearchPage = () => {
   return (
     <>
       <Grid container direction="column">
-        {filtered && filtered.map((widget) => (
-          <Grid container item key={widget.id} xs={12} justify="center">
-            <WidgetCard
-              title={widget.name}
-              type={widget.type}
-              yTitle={widget.yTitle}
-              series={widget.series}
-              xCategories={widget.xCategories}
-              onDelete={handleDelete}
-              onEdit={() => history.push(`/widget/${widget.id}`)}
-            />
-          </Grid>
-        ))}
+        {filtered.length
+          ? filtered.map((widget) => (
+            <Grid container item key={widget.id} xs={12} justify="center">
+              <WidgetCard
+                title={widget.name}
+                type={widget.type}
+                yTitle={widget.yTitle}
+                series={widget.series}
+                xCategories={widget.xCategories}
+                onDelete={handleDelete}
+                onEdit={() => history.push(`/widget/${widget.id}`)}
+              />
+            </Grid>
+          )) : (
+            <div className="no-data">
+              <span>No widget with that name!</span>
+            </div>
+          )}
       </Grid>
       <DeleteWidget
         open={Boolean(deleteModal)}
