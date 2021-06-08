@@ -23,7 +23,7 @@ const WidgetPage = () => {
   const dispatch = useDispatch();
 
   const [widget, setWidget] = useState({});
-  const [isTourOpen, setIsTourOpen] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(!localStorage.getItem('createWidgetVisited'));
 
   useEffect(() => {
     localStorage.setItem('createWidgetVisited', true);
