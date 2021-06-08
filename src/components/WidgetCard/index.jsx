@@ -11,7 +11,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './styles';
 
 const WidgetCard = ({
-  type, series, yTitle, title, disableOptions, xCategories,
+  type, series, yTitle, title, disableOptions, xCategories, onDelete, onEdit,
 }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -58,8 +58,8 @@ const WidgetCard = ({
                   open={Boolean(anchorEl)}
                   onClose={() => setAnchorEl(null)}
                 >
-                  <MenuItem>Edit</MenuItem>
-                  <MenuItem>Delete</MenuItem>
+                  <MenuItem onClick={onEdit}>Edit</MenuItem>
+                  <MenuItem onClick={onDelete}>Delete</MenuItem>
                 </Menu>
               </Grid>
             )
@@ -82,12 +82,16 @@ WidgetCard.propTypes = {
   yTitle: PropTypes.string,
   disableOptions: PropTypes.bool,
   xCategories: PropTypes.array,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 WidgetCard.defaultProps = {
   yTitle: null,
   disableOptions: false,
   xCategories: null,
+  onEdit: () => {},
+  onDelete: () => {},
 };
 
 export default WidgetCard;
