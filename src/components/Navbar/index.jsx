@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import {
   AppBar, Toolbar, OutlinedInput, InputLabel, InputAdornment, FormControl, Grid,
@@ -8,11 +8,18 @@ import {
 import { Search as SearchIcon } from '@material-ui/icons';
 
 import useStyles from './styles';
-
+import debounce from '../../utils/debounce';
 import LogoImage from '../../assets/logo.png';
 
 const Navbar = () => {
   const classes = useStyles();
+  const history = useHistory();
+
+  const searchContent = debounce((event) => {
+    if (event.target.value) {
+      history.push(`/search/${event.target.value}`);
+    }
+  }, 500);
 
   return (
     <AppBar position="fixed" color="default">
@@ -36,6 +43,7 @@ const Navbar = () => {
                 name="search"
                 label="Search"
                 className={classes.search}
+                onChange={searchContent}
                 startAdornment={(
                   <InputAdornment position="start">
                     <SearchIcon />
