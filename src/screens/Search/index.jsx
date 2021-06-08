@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Grid } from '@material-ui/core';
@@ -9,6 +9,7 @@ import { WidgetCard, DeleteWidget } from '../../components';
 const SearchPage = () => {
   const widgets = useSelector((state) => state.widgets);
   const { name } = useParams();
+  const history = useHistory();
   const [filtered, setFiltered] = useState();
   const [deleteModal, setDeleteModal] = useState(false);
 
@@ -34,6 +35,7 @@ const SearchPage = () => {
               series={widget.series}
               xCategories={widget.xCategories}
               onDelete={handleDelete}
+              onEdit={() => history.push(`/widget/${widget.id}`)}
             />
           </Grid>
         ))}
