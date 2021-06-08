@@ -28,6 +28,28 @@ const FormWidget = ({ widget, onChange }) => {
     });
   }, [name, yTitle, type, xCategories, series]);
 
+  useEffect(() => {
+    if (name !== widget.name) {
+      setName(widget.name);
+    }
+
+    if (yTitle !== widget.yTitle) {
+      setYTitle(widget.yTitle);
+    }
+
+    if (type !== widget.type) {
+      setType(widget.type);
+    }
+
+    if (xCategories !== widget.xCategories) {
+      setXCategories(widget.xCategories);
+    }
+
+    if (series !== widget.series) {
+      setSeries(widget.series);
+    }
+  }, [widget]);
+
   const newSerie = () => {
     const copy = [...series];
     setSeries(copy.concat({ name: null, data: [] }));

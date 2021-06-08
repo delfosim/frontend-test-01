@@ -8,7 +8,7 @@ const MultiInput = ({
   values, setValues, onlyNumbers, label,
 }) => {
   const classes = useStyles();
-  const [items, setItems] = useState(values);
+  const [items, setItems] = useState(values.map((value, index) => ({ value, index })));
   const [input, setInput] = useState('');
 
   const handleDelete = (index) => {

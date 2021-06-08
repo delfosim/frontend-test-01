@@ -11,3 +11,11 @@ export function deleteWidget(id) {
     id,
   };
 }
+
+export function updateWidget(id, widget) {
+  return {
+    type: '@widgets/UPDATE',
+    id,
+    widget,
+  };
+}

@@ -21,6 +21,18 @@ export default function widgets(state = initialState, action) {
       localStorage.setItem('widgets', JSON.stringify(newState));
 
       return newState;
+    case '@widgets/UPDATE':
+      newState = state.map((widget) => {
+        if (widget.id !== action.id) {
+          return action.widget;
+        }
+
+        return widget;
+      });
+
+      localStorage.setItem('widgets', JSON.stringify(newState));
+
+      return newState;
     default:
       return state;
   }
