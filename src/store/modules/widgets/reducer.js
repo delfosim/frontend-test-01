@@ -23,8 +23,8 @@ export default function widgets(state = initialState, action) {
       return newState;
     case '@widgets/UPDATE':
       newState = state.map((widget) => {
-        if (widget.id !== action.id) {
-          return action.widget;
+        if (widget.id === action.id) {
+          return { ...action.widget, id: action.id };
         }
 
         return widget;
