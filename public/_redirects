@@ -1,0 +1,2 @@
+http://lp-charts.netlify.app/* https://lp-charts.netlify.app/:splat 301!
+/* /index.html 200
