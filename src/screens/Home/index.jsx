@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Grid } from '@material-ui/core';
 
-import { WidgetCard } from '../../components';
+import { WidgetCard, DeleteWidget } from '../../components';
 
 const HomePage = () => {
   const widgets = useSelector((state) => state.widgets);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const handleDelete = (id) => {
+    setDeleteModal(id);
+  };
 
   return (
-    <Grid container direction="column">
-      {widgets && widgets.map((widget) => (
-        <Grid container item key={widget.id} xs={12} justify="center">
-          <WidgetCard
-            title={widget.name}
-            type={widget.type}
-            yTitle={widget.yTitle}
-            series={widget.series}
-            xCategories={widget.xCategories}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <Grid container direction="column">
+        {widgets && widgets.map((widget) => (
+          <Grid container item key={widget.id} xs={12} justify="center">
+            <WidgetCard
+              title={widget.name}
+              type={widget.type}
+              yTitle={widget.yTitle}
+              series={widget.series}
+              xCategories={widget.xCategories}
+              onDelete={() => handleDelete(widget.id)}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <DeleteWidget
+        open={Boolean(deleteModal)}
+        widget={widgets.filter((widget) => widget.id === deleteModal)[0]}
+        onClose={() => setDeleteModal(null)}
+      />
+    </>
   );
 };
 

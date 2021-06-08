@@ -4,3 +4,10 @@ export function addNewWidget(widget) {
     widget,
   };
 }
+
+export function deleteWidget(id) {
+  return {
+    type: '@widgets/DELETE',
+    id,
+  };
+}
