@@ -76,6 +76,7 @@ const FormWidget = ({ widget, onChange }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           fullWidth
+          data-tut="widget-name-input"
         />
       </Grid>
       <Grid item xs={12} md={6}>
@@ -83,6 +84,7 @@ const FormWidget = ({ widget, onChange }) => {
           value={type}
           onChange={(e) => setType(e.target.value)}
           className={classes.select}
+          data-tut="widget-type-input"
         >
           <MenuItem value="line">Line</MenuItem>
           <MenuItem value="spline">Spline</MenuItem>
@@ -92,9 +94,9 @@ const FormWidget = ({ widget, onChange }) => {
         </Select>
       </Grid>
       <Grid item xs={12} md={6}>
-        <Paper square className={classes.categories}>
+        <Paper square className={classes.categories} data-tut="widget-data-labels-input">
           <MultiInput
-            label="X Categories"
+            label="Data Labels"
             values={xCategories}
             setValues={setXCategories}
           />
@@ -107,6 +109,7 @@ const FormWidget = ({ widget, onChange }) => {
           value={yTitle}
           onChange={(e) => setYTitle(e.target.value)}
           fullWidth
+          data-tut="widget-y-title-input"
         />
       </Grid>
       <Grid item xs={12}>
@@ -115,32 +118,37 @@ const FormWidget = ({ widget, onChange }) => {
       <Grid container item xs={12} spacing={2} alignItems="stretch" className={classes.seriesContainer}>
         {series.map((serie, index) => (
           <Grid item xs={12} md={6} key={index}>
-            <Paper square className={classes.serie}>
+            <Paper square className={classes.serie} data-tut="widget-series-input">
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <TextField
-                    label="Serie Name"
+                    label="Series Name"
                     fullWidth
                     value={serie.name}
                     onChange={(e) => handleSerie(e.target.value, index, 'name')}
+                    data-tut="widget-serie-name-input"
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
                     type="color"
                     fullWidth
-                    label="Serie Color"
+                    label="Series Color"
                     value={serie.color}
                     onChange={(e) => handleSerie(e.target.value, index, 'color')}
+                    data-tut="widget-serie-color-input"
                   />
                 </Grid>
               </Grid>
-              <MultiInput
-                label="New Serie Value"
-                values={serie.data}
-                setValues={(value) => handleSerie(value, index, 'data')}
-                onlyNumbers
-              />
+              <Grid item data-tut="widget-serie-value-input">
+
+                <MultiInput
+                  label="New Series Value"
+                  values={serie.data}
+                  setValues={(value) => handleSerie(value, index, 'data')}
+                  onlyNumbers
+                />
+              </Grid>
               <IconButton onClick={() => deleteSerie(index)}>
                 <DeleteIcon />
               </IconButton>
@@ -148,7 +156,7 @@ const FormWidget = ({ widget, onChange }) => {
           </Grid>
         ))}
         <Grid item xs={12} md={6}>
-          <Paper square className={classes.newSerie}>
+          <Paper square className={classes.newSerie} data-tut="widget-serie-new-input">
             <Grid container alignItems="center" justify="center">
               <IconButton onClick={newSerie}>
                 <AddIcon />
