@@ -7,8 +7,11 @@ run: ;@echo "Starting....."; \
 install: ;@echo "Installing....."; \
 	npm install
 
-build: ;@echo "Installing....."; \
+build: ;@echo "Building....."; \
 	npm run build
+
+build: ;@echo "Testing....."; \
+	npm run cypress
 
 clean : ;
 	rm -rf node_modules

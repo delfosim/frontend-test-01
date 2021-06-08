@@ -4,6 +4,7 @@ const useStyles = makeStyles(() => ({
   save: {
     width: '250px',
     maxWidth: '90%',
+    marginTop: '48px',
   },
   info: {
     position: 'fixed',

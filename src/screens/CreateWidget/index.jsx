@@ -40,26 +40,21 @@ const WidgetPage = () => {
   return (
     <Grid container alignItems="center" direction="column">
       <Grid container item justify="center" data-tut="widget-form">
-        <FormWidget onChange={setWidget} />
-      </Grid>
-      <Grid
-        xs={11}
-        item
-        container
-        direction="column"
-        alignItems="center"
-        data-tut="widget-preview"
-      >
-        <WidgetCard
-          title={widget.name}
-          type={widget.type}
-          yTitle={widget.yTitle}
-          series={widget.series}
-          xCategories={widget.xCategories}
-          disableOptions
+        <FormWidget
+          onChange={setWidget}
+          preview={(
+            <WidgetCard
+              title={widget.name}
+              type={widget.type}
+              yTitle={widget.yTitle}
+              series={widget.series}
+              xCategories={widget.xCategories}
+              disableOptions
+            />
+          )}
         />
       </Grid>
-      <Grid xs={12} item container justify="center">
+      <Grid item container justify="center">
         <Button
           variant="contained"
           color="primary"
@@ -72,6 +67,7 @@ const WidgetPage = () => {
         </Button>
       </Grid>
       <Fab
+        data-tut="widget-info"
         className={classes.info}
         onClick={() => setIsTourOpen(true)}
       >

@@ -33,17 +33,17 @@ const EditWidgetPage = () => {
       <FormWidget
         widget={widgets.filter((w) => w.id === id)[0]}
         onChange={setWidget}
+        preview={(
+          <WidgetCard
+            title={widget.name}
+            type={widget.type}
+            yTitle={widget.yTitle}
+            series={widget.series}
+            xCategories={widget.xCategories}
+            disableOptions
+          />
+        )}
       />
-      <Grid xs={11} item container direction="column" alignItems="center">
-        <WidgetCard
-          title={widget.name}
-          type={widget.type}
-          yTitle={widget.yTitle}
-          series={widget.series}
-          xCategories={widget.xCategories}
-          disableOptions
-        />
-      </Grid>
       <Grid xs={12} item container justify="center">
         <Button
           variant="contained"
