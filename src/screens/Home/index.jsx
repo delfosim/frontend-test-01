@@ -35,7 +35,7 @@ const HomePage = () => {
           : (
             <div className="no-data">
               <span>No data!</span>
-              <span>Please create a widget.</span>
+              <span>Please, create a widget.</span>
             </div>
           )}
       </Grid>
