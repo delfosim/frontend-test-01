@@ -19,8 +19,8 @@ const SearchPage = () => {
 
   return (
     <Grid container direction="column">
-      {filtered && filtered.map((widget, key) => (
-        <Grid container item key={key} xs={12} justify="center">
+      {filtered && filtered.map((widget) => (
+        <Grid container item key={widget.id} xs={12} justify="center">
           <WidgetCard
             title={widget.name}
             type={widget.type}

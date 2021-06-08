@@ -10,8 +10,8 @@ const HomePage = () => {
 
   return (
     <Grid container direction="column">
-      {widgets && widgets.map((widget, key) => (
-        <Grid container item key={key} xs={12} justify="center">
+      {widgets && widgets.map((widget) => (
+        <Grid container item key={widget.id} xs={12} justify="center">
           <WidgetCard
             title={widget.name}
             type={widget.type}
