@@ -27,7 +27,7 @@ const HomePage = () => {
               series={widget.series}
               xCategories={widget.xCategories}
               onDelete={() => handleDelete(widget.id)}
-              onEdit={() => history.push(`/widgets/${widget.id}`)}
+              onEdit={() => history.push(`/widget/${widget.id}`)}
             />
           </Grid>
         ))}
