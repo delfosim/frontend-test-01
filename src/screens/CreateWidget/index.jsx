@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import Tour from 'reactour';
 
 import {
   Grid, Button, Fab,
@@ -10,10 +8,9 @@ import {
 import {
   Save as SaveIcon,
 } from '@material-ui/icons';
-import { WidgetCard, FormWidget } from '../../components';
+import { WidgetCard, FormWidget, WidgetTour } from '../../components';
 
 import useStyles from './styles';
-import tourConfig from './tourConfig';
 
 import { addNewWidget } from '../../store/modules/widgets/actions';
 
@@ -33,9 +30,6 @@ const WidgetPage = () => {
     dispatch(addNewWidget(widget));
     history.push('/');
   };
-
-  const disableBody = (target) => disableBodyScroll(target);
-  const enableBody = (target) => enableBodyScroll(target);
 
   return (
     <Grid container alignItems="center" direction="column">
@@ -76,12 +70,8 @@ const WidgetPage = () => {
       >
         ?
       </Fab>
-      <Tour
+      <WidgetTour
         isOpen={isTourOpen}
-        steps={tourConfig}
-        rounded={0}
-        onAfterOpen={disableBody}
-        onBeforeClose={enableBody}
         onRequestClose={() => setIsTourOpen(false)}
       />
     </Grid>

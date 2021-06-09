@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Chip, TextField, Grid } from '@material-ui/core';
+import { TextField, Grid } from '@material-ui/core';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import update from 'immutability-helper';
 
+import Card from './Card';
 import useStyles from './styles';
 
 const MultiInput = ({
@@ -33,6 +37,20 @@ const MultiInput = ({
     }
   };
 
+  const moveItem = useCallback((dragIndex, hoverIndex) => {
+    const dragItem = items[dragIndex];
+
+    const copy = update(items, {
+      $splice: [
+        [dragIndex, 1],
+        [hoverIndex, 0, dragItem],
+      ],
+    });
+
+    setItems(copy);
+    setValues(copy.map((item) => (onlyNumbers ? parseFloat(item.value) : item.value)));
+  }, [items]);
+
   return (
     <Grid container direction="column">
       <Grid item>
@@ -46,11 +64,17 @@ const MultiInput = ({
         />
       </Grid>
       <Grid container item spacing={1} className={classes.items}>
-        {items.map((item, index) => (
-          <Grid item key={index}>
-            <Chip label={item.value} onDelete={() => handleDelete(item.index)} />
-          </Grid>
-        ))}
+        <DndProvider backend={HTML5Backend}>
+          {items.map((item, index) => (
+            <Card
+              key={index}
+              item={item}
+              index={index}
+              moveItem={moveItem}
+              handleDelete={handleDelete}
+            />
+          ))}
+        </DndProvider>
       </Grid>
     </Grid>
   );

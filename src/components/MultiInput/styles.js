@@ -4,6 +4,10 @@ const useStyles = makeStyles(() => ({
   items: {
     marginTop: '4px',
   },
+  item: {
+    cursor: 'grab',
+    padding: '5px',
+  },
 }));
 
 export default useStyles;

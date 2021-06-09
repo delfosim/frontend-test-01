@@ -33,7 +33,7 @@ export default [
   },
   {
     selector: '[data-tut="widget-serie-value-input"]',
-    content: 'Add the values in the series pressing enter between each value.',
+    content: 'Add the values in the series pressing enter between each value. After you can drag to reoder.',
   },
   {
     selector: '[data-tut="widget-serie-new-input"]',

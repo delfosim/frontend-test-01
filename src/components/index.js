@@ -4,6 +4,7 @@ import FormWidget from './FormWidget';
 import MultiInput from './MultiInput';
 import Navbar from './Navbar';
 import WidgetCard from './WidgetCard';
+import WidgetTour from './WidgetTour';
 
 export {
   DeleteWidget,
@@ -12,4 +13,5 @@ export {
   MultiInput,
   Navbar,
   WidgetCard,
+  WidgetTour,
 };

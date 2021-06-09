@@ -80,9 +80,9 @@ const WidgetCard = ({
 };
 
 WidgetCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  series: PropTypes.array.isRequired,
+  title: PropTypes.string,
+  type: PropTypes.string,
+  series: PropTypes.array,
   xTitle: PropTypes.string,
   yTitle: PropTypes.string,
   disableOptions: PropTypes.bool,
@@ -92,6 +92,9 @@ WidgetCard.propTypes = {
 };
 
 WidgetCard.defaultProps = {
+  title: '',
+  type: 'line',
+  series: [],
   xTitle: null,
   yTitle: null,
   disableOptions: false,
