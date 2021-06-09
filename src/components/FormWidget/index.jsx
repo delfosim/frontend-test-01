@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Grid, TextField, Select, MenuItem, Paper, IconButton, InputLabel, FormControl,
+  Grid, TextField, Select, MenuItem, Paper, IconButton, InputLabel, FormControl, Button,
 } from '@material-ui/core';
 import {
-  Add as AddIcon, Delete as DeleteIcon,
+  Add as AddIcon, Delete as DeleteIcon, Save as SaveIcon,
 } from '@material-ui/icons';
 import MultiInput from '../MultiInput';
 
@@ -13,7 +13,9 @@ import useStyles from './styles';
 
 const defaultSeries = [{ name: null, data: [] }];
 
-const FormWidget = ({ widget, onChange, preview }) => {
+const FormWidget = ({
+  widget, onChange, preview, saveAction, saveTitle,
+}) => {
   const classes = useStyles();
 
   const [name, setName] = useState(widget.name || '');
@@ -194,7 +196,21 @@ const FormWidget = ({ widget, onChange, preview }) => {
         </Grid>
       </Grid>
       <Grid item container md={8} data-tut="widget-preview">
-        {preview}
+        <Grid item container xs={12}>
+          {preview}
+        </Grid>
+        <Grid item container xs={12} justify="center">
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<SaveIcon />}
+            className={classes.save}
+            onClick={saveAction}
+            data-tut="widget-button-save"
+          >
+            {saveTitle}
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
@@ -214,6 +230,8 @@ FormWidget.propTypes = {
     })),
   }),
   onChange: PropTypes.func,
+  saveAction: PropTypes.func,
+  saveTitle: PropTypes.string,
   preview: PropTypes.node,
 };
 
@@ -227,6 +245,8 @@ FormWidget.defaultProps = {
     series: defaultSeries,
   },
   onChange: () => {},
+  saveAction: () => {},
+  saveTitle: 'Save',
   preview: (<div />),
 };
 

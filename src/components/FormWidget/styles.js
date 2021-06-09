@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '24px',
     fontWeight: 'bold',
   },
+  save: {
+    width: '250px',
+    maxWidth: '90%',
+    marginTop: '24px',
+  },
 }));
 
 export default useStyles;

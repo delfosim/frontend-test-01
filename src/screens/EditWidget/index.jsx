@@ -3,11 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  Grid, Button, Fab,
+  Grid, Fab,
 } from '@material-ui/core';
-import {
-  Save as SaveIcon,
-} from '@material-ui/icons';
 import { WidgetCard, FormWidget, WidgetTour } from '../../components';
 
 import useStyles from './styles';
@@ -49,21 +46,9 @@ const EditWidgetPage = () => {
             disableOptions
           />
         )}
+        saveAction={handleSave}
+        saveTitle="Update Widget"
       />
-      <Grid item container justify="flex-start" xs={11}>
-        <Grid item container xs={12} md={4} lg={3} justify="center">
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<SaveIcon />}
-            className={classes.save}
-            onClick={handleSave}
-            data-tut="widget-button-save"
-          >
-            Update Widget
-          </Button>
-        </Grid>
-      </Grid>
       <Fab
         data-tut="widget-info"
         className={classes.info}

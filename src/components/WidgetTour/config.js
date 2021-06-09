@@ -40,12 +40,12 @@ export default [
     content: 'Add a new series into your chart.',
   },
   {
-    selector: '[data-tut="widget-button-save"]',
-    content: 'To finish, this is the create button.',
-  },
-  {
     selector: '[data-tut="widget-preview"]',
     content: 'Here is your chart preview.',
+  },
+  {
+    selector: '[data-tut="widget-button-save"]',
+    content: 'To finish, this is the create button.',
   },
   {
     selector: '[data-tut="widget-info"]',
