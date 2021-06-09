@@ -37,6 +37,7 @@ const EditWidgetPage = () => {
           <WidgetCard
             title={widget.name}
             type={widget.type}
+            xTitle={widget.xTitle}
             yTitle={widget.yTitle}
             series={widget.series}
             xCategories={widget.xCategories}
@@ -44,16 +45,19 @@ const EditWidgetPage = () => {
           />
         )}
       />
-      <Grid xs={12} item container justify="center">
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<SaveIcon />}
-          className={classes.save}
-          onClick={handleSave}
-        >
-          Update Widget
-        </Button>
+      <Grid item container justify="flex-start" xs={11}>
+        <Grid item container xs={12} md={4} lg={3} justify="center">
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<SaveIcon />}
+            className={classes.save}
+            onClick={handleSave}
+            data-tut="widget-button-save"
+          >
+            Update Widget
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

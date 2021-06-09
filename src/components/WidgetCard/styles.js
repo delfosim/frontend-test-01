@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid rgba(0, 0, 0, 0.3)',
   },
   title: {
+    height: '28px',
     fontSize: '24px',
     color: theme.palette.secondary.main,
   },

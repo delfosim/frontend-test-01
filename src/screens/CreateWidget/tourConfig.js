@@ -4,6 +4,10 @@ export default [
     content: 'First set a name to your widget.',
   },
   {
+    selector: '[data-tut="widget-type-input"]',
+    content: 'Then you select the chart type. Like a line, spline, area, column or a bar.',
+  },
+  {
     selector: '[data-tut="widget-x-title-input"]',
     content: 'The x axis title, showing next to the x axis line. This title by default is hidden.',
   },
@@ -12,12 +16,8 @@ export default [
     content: 'The y axis title, showing next to the y axis line. This title by default is hidden.',
   },
   {
-    selector: '[data-tut="widget-type-input"]',
-    content: 'Then you select the chart type. Like a line, spline, area, column or a bar.',
-  },
-  {
     selector: '[data-tut="widget-data-labels-input"]',
-    content: 'Data labels can be added to the data series. This can increase readability and comprehension for small datasets.',
+    content: 'Data labels can be added to the data series. This can increase readability and comprehension for small datasets, add new values pressing enter between each value',
   },
   {
     selector: '[data-tut="widget-series-input"]',
@@ -40,12 +40,12 @@ export default [
     content: 'Add a new series into your chart.',
   },
   {
-    selector: '[data-tut="widget-preview"]',
-    content: 'Here is your chart preview.',
-  },
-  {
     selector: '[data-tut="widget-button-save"]',
     content: 'To finish, this is the create button.',
+  },
+  {
+    selector: '[data-tut="widget-preview"]',
+    content: 'Here is your chart preview.',
   },
   {
     selector: '[data-tut="widget-info"]',
