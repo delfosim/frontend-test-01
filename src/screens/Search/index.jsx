@@ -24,11 +24,11 @@ const SearchPage = () => {
   };
 
   return (
-    <>
-      <Grid container direction="column">
+    <Grid container>
+      <Grid container item xs={12} direction="column" alignItems="center" spacing={2}>
         {filtered.length
           ? filtered.map((widget) => (
-            <Grid container item key={widget.id} xs={12} justify="center">
+            <Grid container item key={widget.id} xs={11} justify="center">
               <WidgetCard
                 title={widget.name}
                 type={widget.type}
@@ -50,7 +50,7 @@ const SearchPage = () => {
         widget={widgets.filter((widget) => widget.id === deleteModal)[0]}
         onClose={() => setDeleteModal(null)}
       />
-    </>
+    </Grid>
   );
 };
 
