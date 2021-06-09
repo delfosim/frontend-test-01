@@ -21,7 +21,7 @@ const Home = () => {
                 Nenhum Widget foi encontrado
               </Typography>
               <Typography align="center">
-                Clique no icone de abaixo para adicionar um novo widget.
+                Clique no icone abaixo para adicionar um novo widget.
               </Typography>
             </Container>
           ) : (
