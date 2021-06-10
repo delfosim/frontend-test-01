@@ -5,7 +5,9 @@
   "main": "src/index.jsx",
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "cypress": "cypress run",
+    "cypress:open": "cypress open"
   },
   "author": "lpeil",
   "license": "ISC",
@@ -40,6 +42,7 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^5.2.5",
+    "cypress": "^7.5.0",
     "eslint": "^7.26.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
