@@ -11,7 +11,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './styles';
 
 const WidgetCard = ({
-  type, series, yTitle, title, disableOptions, xCategories, onDelete, onEdit,
+  type, series, yTitle, xTitle, title, disableOptions, xCategories, onDelete, onEdit,
 }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,6 +24,10 @@ const WidgetCard = ({
       },
     },
     xAxis: {
+      title: {
+        enabled: Boolean(xTitle),
+        text: xTitle,
+      },
       categories: xCategories,
     },
     chart: {
@@ -40,7 +44,7 @@ const WidgetCard = ({
     <Paper square className={classes.card}>
       <Grid container justify="space-between" alignItems="center" className={classes.header}>
         <Grid item>
-          <span className={classes.title}>{title}</span>
+          <div id="chart-title" className={classes.title}>{title}</div>
         </Grid>
         {
           !disableOptions
@@ -76,9 +80,10 @@ const WidgetCard = ({
 };
 
 WidgetCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  series: PropTypes.array.isRequired,
+  title: PropTypes.string,
+  type: PropTypes.string,
+  series: PropTypes.array,
+  xTitle: PropTypes.string,
   yTitle: PropTypes.string,
   disableOptions: PropTypes.bool,
   xCategories: PropTypes.array,
@@ -87,6 +92,10 @@ WidgetCard.propTypes = {
 };
 
 WidgetCard.defaultProps = {
+  title: '',
+  type: 'line',
+  series: [],
+  xTitle: null,
   yTitle: null,
   disableOptions: false,
   xCategories: null,

@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  Grid, Button,
+  Grid, Fab,
 } from '@material-ui/core';
-import {
-  Save as SaveIcon,
-} from '@material-ui/icons';
-import { WidgetCard, FormWidget } from '../../components';
+import { WidgetCard, FormWidget, WidgetTour } from '../../components';
 
 import useStyles from './styles';
 
@@ -22,11 +19,16 @@ const EditWidgetPage = () => {
   const widgets = useSelector((state) => state.widgets);
 
   const [widget, setWidget] = useState({});
+  const [isTourOpen, setIsTourOpen] = useState(!localStorage.getItem('createWidgetVisited'));
 
   const handleSave = () => {
     dispatch(updateWidget(id, widget));
     history.push('/');
   };
+
+  useEffect(() => {
+    localStorage.setItem('updateWidgetVisited', true);
+  }, []);
 
   return (
     <Grid container alignItems="center" direction="column">
@@ -37,24 +39,27 @@ const EditWidgetPage = () => {
           <WidgetCard
             title={widget.name}
             type={widget.type}
+            xTitle={widget.xTitle}
             yTitle={widget.yTitle}
             series={widget.series}
             xCategories={widget.xCategories}
             disableOptions
           />
         )}
+        saveAction={handleSave}
+        saveTitle="Update Widget"
       />
-      <Grid xs={12} item container justify="center">
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<SaveIcon />}
-          className={classes.save}
-          onClick={handleSave}
-        >
-          Update Widget
-        </Button>
-      </Grid>
+      <Fab
+        data-tut="widget-info"
+        className={classes.info}
+        onClick={() => setIsTourOpen(true)}
+      >
+        ?
+      </Fab>
+      <WidgetTour
+        isOpen={isTourOpen}
+        onRequestClose={() => setIsTourOpen(false)}
+      />
     </Grid>
   );
 };

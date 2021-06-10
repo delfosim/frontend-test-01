@@ -5,8 +5,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   title: {
-    margin: '0 0 25px',
+    margin: 0,
     color: theme.palette.secondary.main,
+  },
+  subtitle: {
+    color: theme.palette.secondary.main,
+    margin: '8px 0',
   },
   serie: {
     position: 'relative',
@@ -21,8 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   newSerie: {
-    height: '100%',
-    minHeight: '100px',
+    height: '100px',
     '& .MuiGrid-root': {
       height: '100%',
     },
@@ -30,24 +33,16 @@ const useStyles = makeStyles((theme) => ({
   categories: {
     padding: '10px 15px 20px',
   },
-  seriesContainer: {
-    margin: 0,
-    padding: '0!important',
-    width: '100%',
-  },
-  preview: {
-    margin: 0,
-    width: '100%',
-    padding: '0 16px!important',
-  },
-  previewContainer: {
-    padding: '16px 0!important',
-  },
   seriesTitle: {
     margin: 0,
     color: theme.palette.secondary.main,
     fontSize: '24px',
     fontWeight: 'bold',
+  },
+  save: {
+    width: '250px',
+    maxWidth: '90%',
+    marginTop: '24px',
   },
 }));
 

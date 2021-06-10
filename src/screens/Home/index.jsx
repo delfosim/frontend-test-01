@@ -16,11 +16,11 @@ const HomePage = () => {
   };
 
   return (
-    <>
-      <Grid container direction="column">
+    <Grid container>
+      <Grid container item xs={12} direction="column" alignItems="center" spacing={2}>
         {widgets.length
           ? widgets.map((widget) => (
-            <Grid container item key={widget.id} xs={12} justify="center">
+            <Grid container item key={widget.id} xs={10}>
               <WidgetCard
                 title={widget.name}
                 type={widget.type}
@@ -33,10 +33,10 @@ const HomePage = () => {
             </Grid>
           ))
           : (
-            <div className="no-data">
+            <Grid item className="no-data">
               <span>No data!</span>
               <span>Please, create a widget.</span>
-            </div>
+            </Grid>
           )}
       </Grid>
       <DeleteWidget
@@ -44,7 +44,7 @@ const HomePage = () => {
         widget={widgets.filter((widget) => widget.id === deleteModal)[0]}
         onClose={() => setDeleteModal(null)}
       />
-    </>
+    </Grid>
   );
 };
 

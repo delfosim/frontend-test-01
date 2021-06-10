@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import Tour from 'reactour';
 
 import {
-  Grid, Button, Fab,
+  Grid, Fab,
 } from '@material-ui/core';
-import {
-  Save as SaveIcon,
-} from '@material-ui/icons';
-import { WidgetCard, FormWidget } from '../../components';
+import { WidgetCard, FormWidget, WidgetTour } from '../../components';
 
 import useStyles from './styles';
-import tourConfig from './tourConfig';
 
 import { addNewWidget } from '../../store/modules/widgets/actions';
 
@@ -34,9 +28,6 @@ const WidgetPage = () => {
     history.push('/');
   };
 
-  const disableBody = (target) => disableBodyScroll(target);
-  const enableBody = (target) => enableBodyScroll(target);
-
   return (
     <Grid container alignItems="center" direction="column">
       <Grid container item justify="center" data-tut="widget-form">
@@ -46,25 +37,16 @@ const WidgetPage = () => {
             <WidgetCard
               title={widget.name}
               type={widget.type}
+              xTitle={widget.xTitle}
               yTitle={widget.yTitle}
               series={widget.series}
               xCategories={widget.xCategories}
               disableOptions
             />
           )}
+          saveAction={handleSave}
+          saveTitle="Create Widget"
         />
-      </Grid>
-      <Grid item container justify="center">
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<SaveIcon />}
-          className={classes.save}
-          onClick={handleSave}
-          data-tut="widget-button-save"
-        >
-          Create Widget
-        </Button>
       </Grid>
       <Fab
         data-tut="widget-info"
@@ -73,12 +55,8 @@ const WidgetPage = () => {
       >
         ?
       </Fab>
-      <Tour
+      <WidgetTour
         isOpen={isTourOpen}
-        steps={tourConfig}
-        rounded={0}
-        onAfterOpen={disableBody}
-        onBeforeClose={enableBody}
         onRequestClose={() => setIsTourOpen(false)}
       />
     </Grid>

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Grid, TextField, Select, MenuItem, Paper, IconButton, InputLabel, FormControl,
+  Grid, TextField, Select, MenuItem, Paper, IconButton, InputLabel, FormControl, Button,
 } from '@material-ui/core';
 import {
-  Add as AddIcon, Delete as DeleteIcon,
+  Add as AddIcon, Delete as DeleteIcon, Save as SaveIcon,
 } from '@material-ui/icons';
 import MultiInput from '../MultiInput';
 
@@ -13,7 +13,9 @@ import useStyles from './styles';
 
 const defaultSeries = [{ name: null, data: [] }];
 
-const FormWidget = ({ widget, onChange, preview }) => {
+const FormWidget = ({
+  widget, onChange, preview, saveAction, saveTitle,
+}) => {
   const classes = useStyles();
 
   const [name, setName] = useState(widget.name || '');
@@ -25,9 +27,9 @@ const FormWidget = ({ widget, onChange, preview }) => {
 
   useEffect(() => {
     onChange({
-      name, yTitle, type, xCategories, series,
+      name, yTitle, xTitle, type, xCategories, series,
     });
-  }, [name, yTitle, type, xCategories, series]);
+  }, [name, yTitle, xTitle, type, xCategories, series]);
 
   useEffect(() => {
     if (name !== widget.name) {
@@ -36,6 +38,10 @@ const FormWidget = ({ widget, onChange, preview }) => {
 
     if (yTitle !== widget.yTitle) {
       setYTitle(widget.yTitle);
+    }
+
+    if (xTitle !== widget.xTitle) {
+      setXTitle(widget.xTitle);
     }
 
     if (type !== widget.type) {
@@ -69,128 +75,149 @@ const FormWidget = ({ widget, onChange, preview }) => {
   };
 
   return (
-    <Grid container item xs={10} justify="space-between" alignItems="flex-end" spacing={4}>
+    <Grid container item xs={11} justify="space-between" spacing={4} alignItems="flex-start">
       <Grid item xs={12}>
-        <h1 className={classes.title}>Create a widget</h1>
+        <h1 className={classes.title}>Create a widget chart</h1>
       </Grid>
-      <Grid item xs={12} md={6}>
-        <TextField
-          label="Widget Name"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          fullWidth
-          variant="outlined"
-          data-tut="widget-name-input"
-        />
-      </Grid>
-      <Grid item xs={12} md={3}>
-        <TextField
-          label="X Axis Title"
-          name="xTitle"
-          value={xTitle}
-          onChange={(e) => setXTitle(e.target.value)}
-          fullWidth
-          variant="outlined"
-          data-tut="widget-x-title-input"
-        />
-      </Grid>
-      <Grid item xs={12} md={3}>
-        <TextField
-          label="Y Axis Title"
-          name="yTitle"
-          value={yTitle}
-          onChange={(e) => setYTitle(e.target.value)}
-          fullWidth
-          variant="outlined"
-          data-tut="widget-y-title-input"
-        />
-      </Grid>
-      <Grid item container xs={12} className={classes.seriesContainer} spacing={4}>
-        <Grid item container xs={12} md={4} spacing={4} className={classes.seriesContainer}>
-          <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.select}>
-              <InputLabel id="select-type">Chart Type</InputLabel>
-              <Select
-                labelId="select-type"
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-                variant="outlined"
-                label="Chart Type"
-                data-tut="widget-type-input"
-              >
-                <MenuItem value="line">Line</MenuItem>
-                <MenuItem value="spline">Spline</MenuItem>
-                <MenuItem value="area">Area</MenuItem>
-                <MenuItem value="column">Column</MenuItem>
-                <MenuItem value="bar">Bar</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper square className={classes.categories} data-tut="widget-data-labels-input">
-              <MultiInput
-                label="Data Labels"
-                values={xCategories}
-                setValues={setXCategories}
-              />
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <span className={classes.seriesTitle}>Series</span>
-          </Grid>
-          {series.map((serie, index) => (
-            <Grid item xs={12} key={index}>
-              <Paper square className={classes.serie} data-tut="widget-series-input">
-                <Grid container spacing={4}>
-                  <Grid item xs={6}>
-                    <TextField
-                      label="Series Name"
-                      fullWidth
-                      value={serie.name}
-                      onChange={(e) => handleSerie(e.target.value, index, 'name')}
-                      data-tut="widget-serie-name-input"
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      type="color"
-                      fullWidth
-                      label="Series Color"
-                      value={serie.color}
-                      onChange={(e) => handleSerie(e.target.value, index, 'color')}
-                      data-tut="widget-serie-color-input"
-                    />
-                  </Grid>
-                </Grid>
-                <Grid item data-tut="widget-serie-value-input">
-                  <MultiInput
-                    label="New Series Value"
-                    values={serie.data}
-                    setValues={(value) => handleSerie(value, index, 'data')}
-                    onlyNumbers
+      <Grid item container direction="column" md={4} lg={3} spacing={2}>
+        <Grid item>
+          <TextField
+            label="Widget Name"
+            name="widget-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            fullWidth
+            variant="outlined"
+            data-tut="widget-name-input"
+          />
+        </Grid>
+        <Grid item>
+          <h3 className={classes.subtitle}>Chart informations</h3>
+        </Grid>
+        <Grid item>
+          <FormControl
+            variant="outlined"
+            className={classes.select}
+            data-tut="widget-type-input"
+          >
+            <InputLabel id="select-type">Chart Type</InputLabel>
+            <Select
+              labelId="select-type"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              variant="outlined"
+              label="Chart Type"
+            >
+              <MenuItem value="line">Line</MenuItem>
+              <MenuItem value="spline">Spline</MenuItem>
+              <MenuItem value="area">Area</MenuItem>
+              <MenuItem value="column">Column</MenuItem>
+              <MenuItem value="bar">Bar</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item>
+          <TextField
+            label="X Axis Title"
+            name="chart-x-title"
+            value={xTitle}
+            onChange={(e) => setXTitle(e.target.value)}
+            fullWidth
+            variant="outlined"
+            data-tut="widget-x-title-input"
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            label="Y Axis Title"
+            name="chart-y-title"
+            value={yTitle}
+            onChange={(e) => setYTitle(e.target.value)}
+            fullWidth
+            variant="outlined"
+            data-tut="widget-y-title-input"
+          />
+        </Grid>
+        <Grid item>
+          <Paper square className={classes.categories} data-tut="widget-data-labels-input">
+            <MultiInput
+              name="widget-data-label"
+              label="Data Labels"
+              values={xCategories}
+              setValues={setXCategories}
+            />
+          </Paper>
+        </Grid>
+        <Grid item>
+          <h3 className={classes.subtitle}>Chart series</h3>
+        </Grid>
+        {series.map((serie, index) => (
+          <Grid item key={index}>
+            <Paper square className={classes.serie} data-tut="widget-series-input">
+              <Grid container spacing={4}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name={`widget-serie-name-${index}`}
+                    label="Series Name"
+                    fullWidth
+                    value={serie.name}
+                    onChange={(e) => handleSerie(e.target.value, index, 'name')}
+                    data-tut="widget-serie-name-input"
                   />
                 </Grid>
-                <IconButton onClick={() => deleteSerie(index)}>
-                  <DeleteIcon />
-                </IconButton>
-              </Paper>
-            </Grid>
-          ))}
-          <Grid item xs={12}>
-            <Paper square className={classes.newSerie} data-tut="widget-serie-new-input">
-              <Grid container alignItems="center" justify="center">
-                <IconButton onClick={newSerie}>
-                  <AddIcon />
-                </IconButton>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name={`widget-serie-color-${index}`}
+                    type="color"
+                    fullWidth
+                    label="Series Color"
+                    value={serie.color}
+                    onChange={(e) => handleSerie(e.target.value, index, 'color')}
+                    data-tut="widget-serie-color-input"
+                  />
+                </Grid>
               </Grid>
+              <Grid item data-tut="widget-serie-value-input">
+                <MultiInput
+                  name={`widget-serie-value-${index}`}
+                  label="New Series Value"
+                  values={serie.data}
+                  setValues={(value) => handleSerie(value, index, 'data')}
+                  onlyNumbers
+                />
+              </Grid>
+              <IconButton onClick={() => deleteSerie(index)}>
+                <DeleteIcon />
+              </IconButton>
             </Paper>
           </Grid>
+        ))}
+        <Grid item>
+          <Paper square className={classes.newSerie} data-tut="widget-serie-new-input">
+            <Grid container alignItems="center" justify="center">
+              <IconButton onClick={newSerie} data-cy="new-chart-series">
+                <AddIcon />
+              </IconButton>
+            </Grid>
+          </Paper>
         </Grid>
-        <Grid item container xs={12} md={8} className={classes.preview}>
-          <Grid container item className={classes.previewContainer} data-tut="widget-preview">
-            {preview}
-          </Grid>
+      </Grid>
+      <Grid item container md={8} data-tut="widget-preview">
+        <Grid item container xs={12}>
+          {preview}
+        </Grid>
+        <Grid item container xs={12} justify="center">
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<SaveIcon />}
+            className={classes.save}
+            onClick={saveAction}
+            data-cy="chart-save"
+            data-tut="widget-button-save"
+          >
+            {saveTitle}
+          </Button>
         </Grid>
       </Grid>
     </Grid>
@@ -211,6 +238,8 @@ FormWidget.propTypes = {
     })),
   }),
   onChange: PropTypes.func,
+  saveAction: PropTypes.func,
+  saveTitle: PropTypes.string,
   preview: PropTypes.node,
 };
 
@@ -224,6 +253,8 @@ FormWidget.defaultProps = {
     series: defaultSeries,
   },
   onChange: () => {},
+  saveAction: () => {},
+  saveTitle: 'Save',
   preview: (<div />),
 };
 
