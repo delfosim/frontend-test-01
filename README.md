@@ -1,3 +1,6 @@
+# Test Frontend
+https://lp-charts.netlify.app/
+
 ## Available Scripts
 ### `make run`
 
@@ -14,6 +17,12 @@ Install applications dependencies.
 ### `make lint`
 
 Run eslint into the application.
+### `make test`
+
+Run cypress tests on terminal.
+### `make test-open`
+
+Open cypress tests.
 ### `make clean`
 
-Remove node_modules folder;
+Remove node_modules folder.
