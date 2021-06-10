@@ -44,7 +44,7 @@ const WidgetCard = ({
     <Paper square className={classes.card}>
       <Grid container justify="space-between" alignItems="center" className={classes.header}>
         <Grid item>
-          <div className={classes.title}>{title}</div>
+          <div id="chart-title" className={classes.title}>{title}</div>
         </Grid>
         {
           !disableOptions

@@ -83,7 +83,7 @@ const FormWidget = ({
         <Grid item>
           <TextField
             label="Widget Name"
-            name="name"
+            name="widget-name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             fullWidth
@@ -119,7 +119,7 @@ const FormWidget = ({
         <Grid item>
           <TextField
             label="X Axis Title"
-            name="xTitle"
+            name="chart-x-title"
             value={xTitle}
             onChange={(e) => setXTitle(e.target.value)}
             fullWidth
@@ -130,7 +130,7 @@ const FormWidget = ({
         <Grid item>
           <TextField
             label="Y Axis Title"
-            name="yTitle"
+            name="chart-y-title"
             value={yTitle}
             onChange={(e) => setYTitle(e.target.value)}
             fullWidth
@@ -141,6 +141,7 @@ const FormWidget = ({
         <Grid item>
           <Paper square className={classes.categories} data-tut="widget-data-labels-input">
             <MultiInput
+              name="widget-data-label"
               label="Data Labels"
               values={xCategories}
               setValues={setXCategories}
@@ -156,6 +157,7 @@ const FormWidget = ({
               <Grid container spacing={4}>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    name={`widget-serie-name-${index}`}
                     label="Series Name"
                     fullWidth
                     value={serie.name}
@@ -165,6 +167,7 @@ const FormWidget = ({
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    name={`widget-serie-color-${index}`}
                     type="color"
                     fullWidth
                     label="Series Color"
@@ -176,6 +179,7 @@ const FormWidget = ({
               </Grid>
               <Grid item data-tut="widget-serie-value-input">
                 <MultiInput
+                  name={`widget-serie-value-${index}`}
                   label="New Series Value"
                   values={serie.data}
                   setValues={(value) => handleSerie(value, index, 'data')}
@@ -191,7 +195,7 @@ const FormWidget = ({
         <Grid item>
           <Paper square className={classes.newSerie} data-tut="widget-serie-new-input">
             <Grid container alignItems="center" justify="center">
-              <IconButton onClick={newSerie}>
+              <IconButton onClick={newSerie} data-cy="new-chart-series">
                 <AddIcon />
               </IconButton>
             </Grid>
@@ -209,6 +213,7 @@ const FormWidget = ({
             startIcon={<SaveIcon />}
             className={classes.save}
             onClick={saveAction}
+            data-cy="chart-save"
             data-tut="widget-button-save"
           >
             {saveTitle}

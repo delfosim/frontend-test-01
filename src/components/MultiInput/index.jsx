@@ -9,7 +9,7 @@ import Card from './Card';
 import useStyles from './styles';
 
 const MultiInput = ({
-  values, setValues, onlyNumbers, label,
+  values, setValues, onlyNumbers, label, name,
 }) => {
   const classes = useStyles();
   const [items, setItems] = useState(values.map((value, index) => ({ value, index })));
@@ -52,9 +52,10 @@ const MultiInput = ({
   }, [items]);
 
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" data-cy={`multi-input-${name}`}>
       <Grid item>
         <TextField
+          name={name}
           type={onlyNumbers ? 'number' : 'text'}
           label={label}
           value={input}
@@ -63,7 +64,7 @@ const MultiInput = ({
           onKeyPress={handlePress}
         />
       </Grid>
-      <Grid container item spacing={1} className={classes.items}>
+      <Grid container item spacing={1} className={classes.items} data-cy="multi-input-items">
         <DndProvider backend={HTML5Backend}>
           {items.map((item, index) => (
             <Card
@@ -85,6 +86,7 @@ MultiInput.propTypes = {
   setValues: PropTypes.func,
   onlyNumbers: PropTypes.bool,
   label: PropTypes.string,
+  name: PropTypes.string,
 };
 
 MultiInput.defaultProps = {
@@ -92,6 +94,7 @@ MultiInput.defaultProps = {
   setValues: () => {},
   onlyNumbers: false,
   label: '',
+  name: '',
 };
 
 export default MultiInput;
