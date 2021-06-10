@@ -95,7 +95,11 @@ const FormWidget = ({
           <h3 className={classes.subtitle}>Chart informations</h3>
         </Grid>
         <Grid item>
-          <FormControl variant="outlined" className={classes.select}>
+          <FormControl
+            variant="outlined"
+            className={classes.select}
+            data-tut="widget-type-input"
+          >
             <InputLabel id="select-type">Chart Type</InputLabel>
             <Select
               labelId="select-type"
@@ -103,7 +107,6 @@ const FormWidget = ({
               onChange={(e) => setType(e.target.value)}
               variant="outlined"
               label="Chart Type"
-              data-tut="widget-type-input"
             >
               <MenuItem value="line">Line</MenuItem>
               <MenuItem value="spline">Spline</MenuItem>

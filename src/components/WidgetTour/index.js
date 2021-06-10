@@ -17,6 +17,7 @@ const WidgetTour = ({ isOpen, onRequestClose }) => {
       onAfterOpen={disableBody}
       onBeforeClose={enableBody}
       onRequestClose={onRequestClose}
+      disableFocusLock
     />
   );
 };
