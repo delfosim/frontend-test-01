@@ -1,54 +1,171 @@
-# Desafio Front-end Delfosim
-> Desafio para ingressar como Front-end Developer na Delfosim em Fortaleza-CE
+# Não existe segregos.
 
-## Sobre o desafio
-Não será passado prazo para entrega, verifique os pré-requisitos e nos dê seu prazo, mas fique atento pois vamos avaliar mais rigorosamente seu código quanto mais demorar para entregar a partir da data em que foi feito o fork desse repositório. A ideia é simples, você terá que desenvolver (com dados falsos) seguindo os pré-requisitos e o seguinte layout:
+## Para utilizar basta abrir o link do vercel(https://delfos-eight.vercel.app/) e utilizar como quiser.
 
-![Desafio](images/tela-01.png?raw=true "Desafio")
+## Importante:
 
-## Ações
-- O usuário deve ser capaz de incluir um novo widget(Gráfico), editar e remover
-- No momento da inclusão desse widget o usuário deve fornecer os valores falsos e na edição o mesmo deve alterar os valores cadastrados
-- Todos esses widgets devem ser listados no Dashboard
+## Desenvolvi uma API simples para este projeto e fiz o deploy com o (https://render.com) por tanto, a primeira requisição pode levar de 30 segundos a 1 minuto.
+### Caso de algum erro desconhecido, se puder me notificar corrigirei imediatamente.
+#
+# API (https://delfos-api.onrender.com)
 
+## Widget Routes
 
-## Pré requisitos
-- ReactJS
-- Utilize desses UI Frameworks ([Bootstrap](https://react-bootstrap.github.io/), [Semantic](https://react.semantic-ui.com/) ou [Material](https://material-ui.com/pt/))
-- Documentar como rodamos servidor do projeto no README.MD
-
-## Dicas
-- React Router
-- Highcharts
-
-## Diferenciais
-- Código bem escrito e documentado
-- Arquivos pequenos com poucas responsabilidades
-- Redux
-- Boa usabilidade
-- Feedback para o usuário no carregamento da consulta
-- Layout flexível (Flexbox)
-- Utilizar as novas features do ECMA
-
-## Pronto para começar o desafio?
-- Faça um "fork" desse repositório na sua conta do Github
-- Crie uma branch com o seu nome e sobrenome ex: ```lucas-franca```
-- Após completar o desafio, crie um "pull request" nesse repositório comparando a sua branch com a master
-- Receberemos uma notificação do seu pull request, faremos a correção da sua solução e entraremos em contato com o email da conta do github em que foi executada o desafio
-
-## FAQ
-- Posso usar o create-react-app para completar o desafio?
-
-**Sim, você pode usar qualquer cli para criar seu projeto**
-
-- Preciso necessariamente fazer um fork do projeto?
-
-**Sim, para que possamos saber quanto tempo você levou para executar o desafio**
-
-- Aonde estão os assets?
-
-**Esse desafio não te dá nenhum asset, você terá que buscá-los por conta própria**
-
-- Tenho mais dúvidas, com quem posso entrar em contato?
-
-**Entre em contato com André Oliveira (andre.oliveira@delfosim.com)**
+- POST- /create
+    
+    `/create`
+    
+    ```json
+    {
+    	"name":"widget",
+    	"graphName":"graph 1",
+    	"data":[100,500,450,600,800,900,900,900]
+    }
+    ```
+    
+     `SUCCESS - 201 Created`
+    
+    ```json
+    {
+    	"id": "a50ba1ba-e0fd-43da-8f45-05fe06d832ed",
+    	"title": {
+    		"text": "Widget"
+    	},
+    	"series": [
+    		{
+    			"data": [
+    				100,
+    				500,
+    				450,
+    				600,
+    				800,
+    				900,
+    				900,
+    				900
+    			],
+    			"name": "Graph 1"
+    		}
+    	]
+    }
+    ```
+    
+     `Same title and same graph name - 400 Bad Request`
+    
+    ```json
+    {
+    	"message": "This graph already exists"
+    }
+    ```
+    
+- GET- /
+    
+    `/ - 200 OK`
+    
+    ```json
+    [
+    	{
+    		"id": "163463df-5b20-4252-a3a1-50ea1f63efea",
+    		"title": {
+    			"text": "Widget 1"
+    		},
+    		"series": [
+    			{
+    				"data": [
+    					1,
+    					2,
+    					5,
+    					3,
+    					6,
+    					5
+    				],
+    				"name": "Graph 1"
+    			}
+    		]
+    	},
+    	{
+    		"id": "f68c5ac4-1d85-405f-80bf-8f79239a3082",
+    		"title": {
+    			"text": "Widget 2"
+    		},
+    		"series": [
+    			{
+    				"data": [
+    					1,
+    					2,
+    					3,
+    					9
+    				],
+    				"name": "Graph 1"
+    			}
+    		]
+    	}
+    ]
+    ```
+    
+- DELETE- /delete
+    
+    `/delete/:id - 204 No Content` 
+    
+    ```json
+    No body returned for response
+    ```
+    
+     `Wrong id - 404 Not Found` 
+    
+    ```json
+    {
+    	"message": "Widget not found"
+    }
+    ```
+    
+     `/delete/ - 204 No Content` 
+    
+    It will delete all widgets
+    
+    ```json
+    No body returned for response
+    ```
+    
+- PATCH- /edit
+    
+    `/edit/:id` 
+    
+    ```json
+    {
+    	"name":"Editing", Optional
+    	"graphName":"Graph 1", Needs to be an existent graph name to change the data
+    	"data":[1,2,3,4,19,55] Optional, but requires graphName to be edited
+    }
+    ```
+    
+     `success - 200 OK` 
+    
+    ```json
+    {
+    		"id": "163463df-5b20-4252-a3a1-50ea1f63efea",
+    		"title": {
+    			"text": "Editing"
+    		},
+    		"series": [
+    			{
+    				"data": [
+    					1,
+    					2,
+    					3,
+    					4,
+    					19,
+    					55
+    				],
+    				"name": "Graph 1"
+    			}
+    		]
+    	}
+    ```
+    
+     `Wrong id - 404 Not Found` 
+    
+    ```json
+    {
+    	"message": "Widget not found"
+    }
+    ```
